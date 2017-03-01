@@ -20,23 +20,23 @@ class Worker
     (1..sites.to_i).each do |page|
       get_response(page).each do |item| 
         next if (attributes = item["ItemAttributes"]).nil?
+        category = Category.find_or_create_by(name: attributes['ProductGroup'])
 
         begin
-          category = Category.find_or_create_by(name: attributes["ProductGroup"])
-          product_name = attributes.to_h["Title"]
-
-          price = if attributes["ListPrice"].present?
-                    attributes["ListPrice"]["Amount"].to_i
-                  elsif item["OfferSummary"].present? and  \
-                    item["OfferSummary"]['LowestNewPrice'].present?
-                    item["OfferSummary"]['LowestNewPrice']['Amount'].to_i
+          product_name = attributes.to_h['Title']
+          price = if attributes['ListPrice'].present?
+                    attributes['ListPrice']['Amount'].to_i
+                  elsif (offer = item['OfferSummary']).present?\
+                    && offer['LowestNewPrice'].present?
+                      offer['LowestNewPrice']['Amount'].to_i
                   end
           next if !price
 
-          image = if item["LargeImage"]
-                    item["LargeImage"]["URL"]
-                  elsif item["ImageSets"].present? and
-                    item["ImageSets"]['ImageSet'].map {|img| img["LargeImage"]["URL"]}
+          image = if item['LargeImage']
+                    item['LargeImage']['URL']
+                  elsif (image_sets = item['ImageSets']).present? \
+                    && image_sets['ImageSet'].present?
+                    image_sets['ImageSet'].map {|img| img['LargeImage']['URL']}
                   end
           next if !image
 
