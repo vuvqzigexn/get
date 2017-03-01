@@ -29,10 +29,11 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-##vyvu
-gem 'vacuum'
+## vyvu
 gem 'bootstrap'
+gem 'devise'
 gem 'haml'
+gem 'vacuum'
 
 
 
