@@ -39,15 +39,15 @@ class Worker
                     image_sets['ImageSet'].map {|img| img['LargeImage']['URL']}
                   end
           next if !image
-          stock = Random.new
+          stock = Random.new.rand(5..30)
           product = Product.find_or_create_by( 
                       name: product_name,
                       image_url: image.to_s,
                       price: price,
                       origin: item['DetailPageURL'],
                       description: valid_description(item),
-                      category_id: category.id
-                      stock: stock.rand(5..30)
+                      category_id: category.id,
+                      stock: stock
               )
           puts "[Import success]  #{product.name}" if product.save
         rescue Exception => e
