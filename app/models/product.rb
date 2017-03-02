@@ -1,4 +1,4 @@
 class Product < ApplicationRecord
-  has_many :post
-  has_many :cart
+  belongs_to :category
+  has_many :cart_items
 end
