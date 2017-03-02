@@ -1,0 +1,80 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+/* universal */
+body {
+  padding-top: 60px;
+}
+section {
+  overflow: auto;
+}
+textarea {
+  resize: vertical;
+}
+.center {
+  text-align: center;
+}
+.center h1 {
+  margin-bottom: 10px;
+}
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.categories-list{
+  padding: 0;
+}
+.rating{
+  color: #31708f;
+  font-size: 20px;
+}
+.checkout-cart{
+  margin-top: 4px;
+  border: 2px solid #fff;
+  padding:4px 30px 4px 40px !important;
+  border-radius: 4px;
+  margin-left: 29px;
+  letter-spacing: .7px;
+  font-weight: 400;
+  font-size: 13px;
+  vertical-align: middle;
+}
+header{
+  background-color: #009a14;
+}
+.iconcart{
+  font-size: 20px;
+  left: 11px;
+  top: 4px;
+  position: absolute;
+  color: white;
+}
+.quantity{
+  display: inline-block !important;
+  width: 40% !important;
+}
+.items-count{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #4a4a4a;
+  background: #fdd835;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  display: inline-block;
+  text-align: center;
+  line-height: 20px;
+  margin-left: 9px;
+  font-size: 14px;
+  font-weight: 700;
+}

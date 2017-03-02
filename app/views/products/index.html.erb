@@ -1,0 +1,74 @@
+<div class="col-md-10"  style="padding-left: 26px;">
+    <div class="container">
+      <% flash.each do |key, value| %>
+        <div class ="alert alert-<%=key%>"> 
+          <%= value%>
+        </div>
+      <% end %>
+    </div>
+  <div class="container">
+    <input type="text" class="form-group" name=""></input>
+    <button class="btn btn-primary"> Search</button>
+  </div>
+  <div class="grip-products col-md-12">
+    <h1><%= @category.nil? ? "Hot deal" : @category.name %></h1>
+    <% ind = 0 %>
+    <% size = @products.size %>
+    <% (0..3).each do |row| %>
+      <% (0..3).each do |col|%>
+        <% ind = 4*row + col %>
+        <% product = @products[ind] %>
+        <% break if product.nil? %>
+        <div class = "col-md-3" style="padding-top: 20px;" >
+          <a href="<%= product_path(product.id)%>" style="text-decoration: none" >
+            <%= image_tag(product.image_url, size: "150x220", alt:  product.name) %>
+          </a>
+            
+          <h5 style="color: green;" >
+            <a href="<%= product_path(product.id)%>" >
+              <%= product.name.truncate(28) %>
+            </a>
+          </h5>
+          <span class="price">
+              <strong style="font-size: 19px;"> <%= "$ #{product.price.to_i/100.0}" %> </strong>
+              <span class="clearfix"></span>
+              <input type="number" value="1" min="0" step="1" class="form-control quantity" id="quantity-<%= product.id %>" />
+              <button class="btn btn-success btn-sm buynow" id='product-<%= product.id %>'  style="float: right;">Buy now</button>
+          </span>
+          <br/>
+          <p class="rating">
+            <span class="rating-content">
+              <i class="glyphicon glyphicon-star"></i>
+              <i class="glyphicon glyphicon-star"></i>
+              <i class="glyphicon glyphicon-star"></i>
+              <i class="glyphicon glyphicon-star"></i>
+              <i class="glyphicon glyphicon-star-empty"></i>
+            </span>
+          </p>
+        </div>
+      <% end %>
+      <div class="clearfix"></div>
+    <% end %>
+  </div>
+  <div class="clearfix"></div>
+  <div class="list-products list-group">
+    <ul class="list-group" style="text-align: center;">
+      <% if ind + 1 < @products.size %>
+        <% ((ind + 1)..(@products.size - 1)).each do |item_index| %>
+          <% product = @products[item_index]%>
+          <li class="list-group-item row">
+            <span class="col-md-3"> 
+              <%= image_tag(product.image_url, size: "30x50") if !product.image_url.include? '['%>
+            </span>
+            <a class="col-md-5" href="/products/<%= product.id %>" > 
+              <%= product.name %>
+            </a>
+            <span class="col-md-3 price" style="text-align: center; float: right;">
+              <strong> <%= "$ #{product.price.to_i/100.0}" %> </strong>
+            </span>
+          </li>
+        <% end %>   
+      <% end %>
+    </ul>
+  </div>
+</div>

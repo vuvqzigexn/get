@@ -1,0 +1,53 @@
+<div class="col-md-10">
+  <div class="cart-items list-group">
+    <% if session[:order].blank? %>
+      <h3>Giở bạn vẵn còn trống</h3>
+    <% else %>
+      <% total = 0 %>
+      <table class="table" >
+        <thead>
+          <tr>
+            <th>Hình ảnh</th>
+            <th>Tên mặt hàng</th>
+            <th>Giá tiền</th>
+            <th>Số lượng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% session[:order].each do |id,item|  %> 
+            <% total += (item['price'].to_i * item['quantity'].to_i)%>
+              <tr>
+                <td>
+                  <span class="col-md-3"> 
+                    <%= image_tag(item['img'], size: "30x50") if !item['img'].include? '['%>
+                  </span> 
+                </td>
+                <td>
+                  <%= link_to(item['name'],product_path(id)) %>
+                </td>
+                <td>
+                  <span class="col-md-3 price">
+                    <strong> <%= "$#{item['price'].to_i/100.0}" %> </strong>
+                  </span>
+                </td>
+                <td>
+                  <%= item['quantity'] %>
+                </td>
+                <td style="width: 90px;">
+                  <span class="glyphicon glyphicon-minus"></span>
+                  <span class="glyphicon glyphicon-plus"></span>
+                </td>
+                <td>
+                  <span class="glyphicon glyphicon-remove"></span>
+                </td>
+              </tr>
+          <% end %>
+        <tbody>
+      </table>
+      <div class="total">
+        <h3> Tổng $<%= total/100.0 %></h3>
+        <button class="btn btn-danger" id="ckbtn"> Thanh Toán</button>
+      </div>
+    <% end %>
+  </div>
+</div>
