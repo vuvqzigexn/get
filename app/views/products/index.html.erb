@@ -1,8 +1,8 @@
 <div class="col-md-10"  style="padding-left: 26px;">
     <div class="container">
       <% flash.each do |key, value| %>
-        <div class ="alert alert-<%=key%>"> 
-          <%= value%>
+        <div class ="alert alert-<%= key %>"> 
+          <%= value %>
         </div>
       <% end %>
     </div>
@@ -13,46 +13,43 @@
   <div class="grip-products col-md-12">
     <h1><%= @category.nil? ? "Hot deal" : @category.name %></h1>
     <% ind = 0 %>
-    <% size = @products.size %>
-    <% (0..3).each do |row| %>
-      <% (0..3).each do |col|%>
-        <% ind = 4*row + col %>
-        <% product = @products[ind] %>
-        <% break if product.nil? %>
-        <div class = "col-md-3" style="padding-top: 20px;" >
-          <a href="<%= product_path(product.id)%>" style="text-decoration: none" >
-            <%= image_tag(product.image_url, size: "150x220", alt:  product.name) %>
+    <% @products.each_with_index do |product,i| %>
+      <% ind = i %>
+      <div class = "col-md-3" >
+        <a href="<%= product_path(product.id)%>"  >
+          <%= image_tag(product.image_url, size: "150x220", alt:  product.name) %>
+        </a>
+        <h5>
+          <a class="title" href="<%= product_path(product.id)%>" >
+            <%= product.name.truncate(28) %>
           </a>
-            
-          <h5 style="color: green;" >
-            <a href="<%= product_path(product.id)%>" >
-              <%= product.name.truncate(28) %>
-            </a>
-          </h5>
-          <span class="price">
-              <strong style="font-size: 19px;"> <%= "$ #{product.price.to_i/100.0}" %> </strong>
-              <span class="clearfix"></span>
-              <input type="number" value="1" min="0" step="1" class="form-control quantity" id="quantity-<%= product.id %>" />
-              <button class="btn btn-success btn-sm buynow" id='product-<%= product.id %>'  style="float: right;">Buy now</button>
+        </h5>
+        <span class="price">
+            <strong> <%= "$ #{product.price.to_i/100.0}" %> </strong>
+            <span class="clearfix"></span>
+            <input type="number" value="1" min="0" step="1" class="form-control quantity" id="quantity-<%= product.id %>" />
+            <button class="btn btn-success btn-sm buynow" id='product-<%= product.id %>'>Buy now</button>
+        </span>
+        <br/>
+        <p class="rating">
+          <span class="rating-content">
+            <i class="glyphicon glyphicon-star"></i>
+            <i class="glyphicon glyphicon-star"></i>
+            <i class="glyphicon glyphicon-star"></i>
+            <i class="glyphicon glyphicon-star"></i>
+            <i class="glyphicon glyphicon-star-empty"></i>
           </span>
-          <br/>
-          <p class="rating">
-            <span class="rating-content">
-              <i class="glyphicon glyphicon-star"></i>
-              <i class="glyphicon glyphicon-star"></i>
-              <i class="glyphicon glyphicon-star"></i>
-              <i class="glyphicon glyphicon-star"></i>
-              <i class="glyphicon glyphicon-star-empty"></i>
-            </span>
-          </p>
-        </div>
+        </p>
+      </div>
+      <% if ((i + 1) % 4) == 0 %>
+        <div class="clearfix"></div>
       <% end %>
-      <div class="clearfix"></div>
+      <% break if i == 11%>
     <% end %>
   </div>
   <div class="clearfix"></div>
   <div class="list-products list-group">
-    <ul class="list-group" style="text-align: center;">
+    <ul class="list-group">
       <% if ind + 1 < @products.size %>
         <% ((ind + 1)..(@products.size - 1)).each do |item_index| %>
           <% product = @products[item_index]%>

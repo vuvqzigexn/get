@@ -1,28 +1,36 @@
 class SessionsController < ApplicationController
 
   def add_to_cart
-    result = if validate_item 
-              session[:order][params[:id]] = item_params
-              {err: false,data: session[:order]}
-            else
-              {err: true,data: "Item not found"}
-            end
-    render :json => result.to_json
+    if validate_item
+      order = session[:order]
+      product = Product.find_by(id: params[:id])
+      permitted = permit_params
+      permitted[:quantity] = \
+        if order[params[:id]].present?
+          permitted[:quantity].to_i + order[params[:id]]['quantity'].to_i
+        else
+          permitted[:quantity].to_i
+        end
+      order[params[:id]] = permitted.merge!({
+        name: product.name,
+        img: product.image_url,
+        price: product.price}
+      )
+      results =  {err: false,data: order}
+    else
+      results =  {err: true,data: "Item not found"}
+    end
+    render :json => results.to_json
   end
 
-  def item_params
-    product = Product.find(params[:id])
-    permitted = params.permit(:id, :quantity)
-    if session[:order][params[:id]].present?
-      quantity = permitted[:quantity].to_i + session[:order][params[:id]]['quantity'].to_i
-      permitted[:quantity] = quantity.to_s
-    end
-    permitted.merge!({name: product.name,img: product.image_url,price: product.price})
-    permitted
-  end
 
   def validate_item
-    (params[:quantity].to_i > 0 && Product.find(params[:id]).present?)
+    (params[:quantity].to_i > 0 && Product.find_by(id: params[:id]).present?)
   end
+
+  private
+    def permit_params
+      permitted = params.permit(:id, :quantity)
+    end
 
 end

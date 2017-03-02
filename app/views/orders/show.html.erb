@@ -1,7 +1,7 @@
 <div class="col-md-10">
   <div class="cart-items list-group">
     <% if session[:order].blank? %>
-      <h3>Giở bạn vẵn còn trống</h3>
+      <h3>Giỏ của bạn vẫn trống</h3>
     <% else %>
       <% total = 0 %>
       <table class="table" >
@@ -33,7 +33,7 @@
                 <td>
                   <%= item['quantity'] %>
                 </td>
-                <td style="width: 90px;">
+                <td width="90">
                   <span class="glyphicon glyphicon-minus"></span>
                   <span class="glyphicon glyphicon-plus"></span>
                 </td>
