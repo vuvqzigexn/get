@@ -50,7 +50,9 @@
       <% @products.each_with_index do |product, i| %>
         <li class="list-group-item row">
           <span class="col-md-3"> 
-            <%= image_tag(product.image_url, size: "30x50") if !product.image_url.include? '['%>
+            <% unless product.image_url.include?('[') %>
+              <%= image_tag(product.image_url, size: "30x50") %>
+            <% end %>
           </span>
           <%= link_to product_path(product.id) ,class: "col-md-5" do %>
             <%= product.name %>

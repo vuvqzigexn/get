@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
       flash[:danger] = "Không tìm thấy danh mục"
       return redirect_to root_path
     end
-    @last_products = @category.products.last(8)
+    @last_products = Category.lastest_products(@category)
     @products = @category.products.page(params[:page])
     render template: "products/index"
   end

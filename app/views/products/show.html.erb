@@ -16,7 +16,10 @@
         <i class="glyphicon glyphicon-star-empty"></i>
       </span>
     </p>
-    <button class="btn btn-success buynow" style="float: left;">Buy now</button>
+    <input type="number" value="1" min="0" max="<%= @product.stock %>" step="1" class="form-control quantity" id="quantity-<%= @product.id %>" />
+    <button class="btn btn-success btn-sm buynow" id='product-<%= @product.id %>'>Buy now</button>
+    </br>
+    <span>Hàng còn: <%= @product.stock %> </span>
   </div>
   <div class="clearfix"></div>
   <div class=" container col-md-12">
