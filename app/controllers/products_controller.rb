@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   def index
-    @last_products = Product.lastest
-    @products = Product.page(params[:page])
+    @last_products = Product.last(Product::LASTEST)
+    @products = Product.page(params[:page]).per(Product::PERPAGE)
   end
 
   def show
