@@ -2,12 +2,13 @@ class CategoriesController < ApplicationController
   def index; end
 
   def show
-    if Category.find_by(id: params[:id]).blank?
+    @category = Category.find(params[:id])
+    if @category.blank?
       flash[:danger] = "Không tìm thấy danh mục"
       return redirect_to root_path
     end
-    @category = Category.find(params[:id])
-    @products = @category.products
+    @last_products = @category.products.last(8)
+    @products = @category.products.page(params[:page]).per(12)
     render template: "products/index"
   end
 end

@@ -13,16 +13,16 @@
   <div class="grip-products col-md-12">
     <h1><%= @category.nil? ? "Hot deal" : @category.name %></h1>
     <% ind = 0 %>
-    <% @products.each_with_index do |product,i| %>
+    <% @last_products.each_with_index do |product,i| %>
       <% ind = i %>
       <div class = "col-md-3" >
-        <a href="<%= product_path(product.id)%>"  >
+        <%= link_to product_path(product.id) do %>
           <%= image_tag(product.image_url, size: "150x220", alt:  product.name) %>
-        </a>
+        <% end %>
         <h5>
-          <a class="title" href="<%= product_path(product.id)%>" >
+          <%= link_to product_path(product.id), class: "title" do %>
             <%= product.name.truncate(28) %>
-          </a>
+          <% end %>
         </h5>
         <span class="price">
             <strong> <%= "$ #{product.price.to_i/100.0}" %> </strong>
@@ -41,31 +41,30 @@
           </span>
         </p>
       </div>
-      <% if ((i + 1) % 4) == 0 %>
-        <div class="clearfix"></div>
-      <% end %>
-      <% break if i == 11%>
+      <%= '<div class="clearfix"></div>'.html_safe if ((i + 1) % 4) == 0 %>
+      <% break if i == 7%>
     <% end %>
   </div>
   <div class="clearfix"></div>
-  <div class="list-products list-group">
-    <ul class="list-group">
-      <% if ind + 1 < @products.size %>
-        <% ((ind + 1)..(@products.size - 1)).each do |item_index| %>
-          <% product = @products[item_index]%>
+  <% if @products.size > ind + 1 %>
+    <span class="all-prodcut container"> <h3> All product </h3> </span>
+    <div class="list-products list-group">
+      <ul class="list-group">
+        <% @products.each_with_index do |product, i| %>
           <li class="list-group-item row">
             <span class="col-md-3"> 
               <%= image_tag(product.image_url, size: "30x50") if !product.image_url.include? '['%>
             </span>
-            <a class="col-md-5" href="/products/<%= product.id %>" > 
+            <%= link_to product_path(product.id) ,class: "col-md-5" do %>
               <%= product.name %>
-            </a>
+            <% end %>
             <span class="col-md-3 price" style="text-align: center; float: right;">
               <strong> <%= "$ #{product.price.to_i/100.0}" %> </strong>
             </span>
           </li>
-        <% end %>   
-      <% end %>
-    </ul>
-  </div>
+        <% end %>
+      </ul>
+      <span class="paginate"> <%= paginate @products , window: 2 %> </span>
+    </div>
+  <% end %>
 </div>

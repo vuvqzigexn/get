@@ -47,9 +47,16 @@ textarea {
   font-weight: 400;
   font-size: 13px;
   vertical-align: middle;
+  background-color: transparent;
+  .pcart{
+    font-size: 15px;line-height: 27px; color: white
+  }
 }
 header{
   background-color: #009a14;
+}
+footer{
+  height: 50px;
 }
 .iconcart{
   font-size: 20px;

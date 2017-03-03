@@ -40,7 +40,7 @@ class Worker
                   end
           next if !image
           stock = Random.new.rand(5..30)
-          product = Product.find_or_create_by( 
+          product = Product.find_or_create_by(
                       name: product_name,
                       image_url: image.to_s,
                       price: price,
@@ -48,7 +48,7 @@ class Worker
                       description: valid_description(item),
                       category_id: category.id,
                       stock: stock
-              )
+            )
           puts "[Import success]  #{product.name}" if product.save
         rescue Exception => e
           puts e

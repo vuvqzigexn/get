@@ -22,15 +22,14 @@
               </li>
               <li> 
                 <%= link_to "Đăng Xuất", destroy_user_session_path, data: {method: "delete"},style: "color: white;" %>
-                </a>
               </li>
             <% end %>
             <li>
-              <a class="checkout-cart" style="background-color: transparent;" href="<%= view_order_path%>">
+              <%= link_to view_order_path, class: "checkout-cart" do %>
                 <i class="iconcart glyphicon glyphicon-shopping-cart"></i>
-                <span style="font-size: 15px;line-height: 27px; color: white" ><b>Giỏ hàng</b></span>
+                <span class="pcart" ><b>Giỏ hàng</b></span>
                 <span class="items-count"><%= session[:order].size%></span>
-              </a>
+              <% end %>
             </li>
           </ul>
         </nav>
@@ -42,6 +41,8 @@
         <%= yield %>
       </div>
     </div>
-    </div>
+    <footer class="container">
+
+    </footer>
   </body>
 </html>
