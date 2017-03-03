@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   def index
     @last_products = Product.last(8)
-    @products = Product.page(params[:page]).per(12)
+    @products = Product.page(params[:page])
   end
 
   def show

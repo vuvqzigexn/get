@@ -16,4 +16,4 @@
 # Ignore Byebug command history file.
 .byebug_history
 _uservm.sh
-.rubocop.yml
+.rake_tasks~

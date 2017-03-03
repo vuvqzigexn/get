@@ -12,9 +12,7 @@
   </div>
   <div class="grip-products col-md-12">
     <h1><%= @category.nil? ? "Hot deal" : @category.name %></h1>
-    <% ind = 0 %>
     <% @last_products.each_with_index do |product,i| %>
-      <% ind = i %>
       <div class = "col-md-3" >
         <%= link_to product_path(product.id) do %>
           <%= image_tag(product.image_url, size: "150x220", alt:  product.name) %>
@@ -46,25 +44,23 @@
     <% end %>
   </div>
   <div class="clearfix"></div>
-  <% if @products.size > ind + 1 %>
-    <span class="all-prodcut container"> <h3> All product </h3> </span>
-    <div class="list-products list-group">
-      <ul class="list-group">
-        <% @products.each_with_index do |product, i| %>
-          <li class="list-group-item row">
-            <span class="col-md-3"> 
-              <%= image_tag(product.image_url, size: "30x50") if !product.image_url.include? '['%>
-            </span>
-            <%= link_to product_path(product.id) ,class: "col-md-5" do %>
-              <%= product.name %>
-            <% end %>
-            <span class="col-md-3 price" style="text-align: center; float: right;">
-              <strong> <%= "$ #{product.price.to_i/100.0}" %> </strong>
-            </span>
-          </li>
-        <% end %>
-      </ul>
-      <span class="paginate"> <%= paginate @products , window: 2 %> </span>
-    </div>
-  <% end %>
+  <span class="all-prodcut container"> <h3> All product </h3> </span>
+  <div class="list-products list-group">
+    <ul class="list-group">
+      <% @products.each_with_index do |product, i| %>
+        <li class="list-group-item row">
+          <span class="col-md-3"> 
+            <%= image_tag(product.image_url, size: "30x50") if !product.image_url.include? '['%>
+          </span>
+          <%= link_to product_path(product.id) ,class: "col-md-5" do %>
+            <%= product.name %>
+          <% end %>
+          <span class="col-md-3 price" style="text-align: center; float: right;">
+            <strong> <%= "$ #{product.price.to_i/100.0}" %> </strong>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+    <span class="paginate"> <%= paginate @products , window: 2 %> </span>
+  </div>
 </div>
