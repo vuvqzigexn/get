@@ -1,0 +1,28 @@
+<div class="col-md-10"  style="padding-left: 30px">
+  <div class="image col-md-5" >
+    <%= image_tag(@product.image_url, size: "400x450") %>
+  </div>
+  <div class="content col-md-6" style="float: right;" >
+    <h3> <%= @product.name%></h3>
+    <h3 class="price">
+        <strong> <%= "$ #{@product.price.to_i/100.0}" %> </strong>
+    </h3>
+    <p class="rating" style="">
+      <span class="rating-content">
+        <i class="glyphicon glyphicon-star"></i>
+        <i class="glyphicon glyphicon-star"></i>
+        <i class="glyphicon glyphicon-star"></i>
+        <i class="glyphicon glyphicon-star"></i>
+        <i class="glyphicon glyphicon-star-empty"></i>
+      </span>
+    </p>
+    <input type="number" value="1" min="0" max="<%= @product.stock %>" step="1" class="form-control quantity" id="quantity-<%= @product.id %>" />
+    <button class="btn btn-success btn-sm buynow" id='product-<%= @product.id %>'>Buy now</button>
+    </br>
+    <span>Hàng còn: <%= @product.stock %> </span>
+  </div>
+  <div class="clearfix"></div>
+  <div class=" container col-md-12">
+    <%= @product.description.html_safe  %>
+  </div>
+</div>

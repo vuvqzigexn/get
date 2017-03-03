@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>Venshop</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body class="container">
+    <header class="navbar navbar-fixed-top">
+      <div class="container">
+        <%= link_to "online shop", root_path, id: "logo" %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <% if !user_signed_in? %>
+              <li>
+                <%= link_to "Đăng nhập", new_user_session_path, html_options = {style: "color: white;"} %>
+              </li>
+            <% else %>
+              <li><%= link_to "Tài khoản", edit_user_registration_path, html_options = {style: "color: white;"}%>
+                
+              </li>
+              <li> 
+                <%= link_to "Đăng Xuất", destroy_user_session_path, data: {method: "delete"},style: "color: white;" %>
+              </li>
+            <% end %>
+            <li>
+              <%= link_to view_order_path, class: "checkout-cart" do %>
+                <i class="iconcart glyphicon glyphicon-shopping-cart"></i>
+                <span class="pcart" ><b>Giỏ hàng</b></span>
+                <span class="items-count"><%= session[:order].size%></span>
+              <% end %>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
+        <%= render 'layouts/adside'%>
+        <%= yield %>
+      </div>
+    </div>
+    <footer class="container">
+
+    </footer>
+  </body>
+</html>
