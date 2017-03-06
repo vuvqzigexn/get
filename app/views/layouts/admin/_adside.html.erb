@@ -1,0 +1,10 @@
+<div class="col-md-2 categories-list">
+  <ul class="list-group">
+    <% Category.all.each do |cate| %>
+      <li class="list-group-item" >
+        <b><%= link_to(cate.name, cate) %></b>
+        <strong class="products-count"> <%= cate.products.count %> </strong>
+      </li>
+    <% end %>
+  </ul>
+</div>

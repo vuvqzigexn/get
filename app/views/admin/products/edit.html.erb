@@ -17,7 +17,7 @@
     <h3 class="price">
       Giá:
       <strong>
-        <%= f.number_field :price,type: "number", min: '0', class: "form-control" %> </strong>
+        <%= f.number_field :price, min: '0', class: "form-control" %> </strong>
     </h3>
     Hàng còn: <%= f.number_field :stock, type: "number", class: "form-control" %>
     <p class="rating" style="">
@@ -35,7 +35,7 @@
       <%= f.text_area :description, class: "form-control",rows: "12" %><br />
     </div>
     <%= f.submit "Submit", class: "btn btn-success btn-sm" %>
-    <%= link_to "Xoa", admin_product_path(@product.id), method: "delete", class: "btn btn-danger btn-sm deletebtn" %>
+    <%= link_to "Xoa", admin_product_path(@product.id), confirm: "Are you sure?", method: "delete", class: "btn btn-danger btn-sm deletebtn" %>
   </div>
 </div>
 <% end %>

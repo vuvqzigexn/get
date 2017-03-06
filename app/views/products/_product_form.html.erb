@@ -1,0 +1,65 @@
+<%= form_for @product, class: "form-group"  do |f| %>
+<div class="col-md-10"  style="padding-left: 30px">
+  <div class="container">
+    <% flash.each do |key, value| %>
+      <div class ="alert alert-<%= key %>"> 
+        <%= value %>
+      </div>
+    <% end %>
+  </div>
+  <div class="image col-md-5" >
+    <%= image_tag(@product.image_url, size: "400x450")  if  @product.image_url %>
+    Link hình ảnh: <%= f.text_field :image_url, class: "form-control" %><br />
+  </div>
+  <div class="content col-md-6" style="float: right;" >
+    <h3>Tên sản phẩm </h3>
+    <% if @product.id.nil? %>
+      <%= f.text_field :name, class: "form-control" %>
+    <%  else %>
+      <p> <%= @product.name %> </p>
+    <% end %>
+    <h3 class="price">
+      Giá:
+      <strong>
+        <% if @product.id.nil? %>
+            <%= f.number_field :price, min: '0', class: "form-control" %>
+        <%  else %>
+          <p> <%= @product.price_text %> </p>
+        <% end %>
+      </strong>
+    </h3>
+      <% if @product.id.nil? %>
+          Hàng còn:  <%= f.number_field :stock, class: "form-control" %>
+      <%  else %>
+        <p> Hàng còn: <%= @product.stock %> </p>
+      <% end %>
+    
+    <p class="rating" style="">
+      <span class="rating-content">
+        <i class="glyphicon glyphicon-star"></i>
+        <i class="glyphicon glyphicon-star"></i>
+        <i class="glyphicon glyphicon-star"></i>
+        <i class="glyphicon glyphicon-star"></i>
+        <i class="glyphicon glyphicon-star-empty"></i>
+      </span>
+    </p>
+    <% if @product.id.nil? %>
+      <%= f.select :category_id, options_for_select(Category.all.collect{ |c| [c.name, c.id] }),html_options = {class: "form-control"} %> 
+    <%  else %>
+      <p> <%= @product.category.name %> </p>
+    <% end %>
+  
+    </br>
+    <div>
+      Mô tả: <br> 
+      <% if @product.id.nil? %>
+        <%= f.text_area :description, class: "form-control",rows: "12" %>
+      <%  else %>
+        <p> <%= @product.description.html_safe %> </p>
+      <% end %>
+      <br />
+    </div>
+    <%= f.submit "Submit", class: "btn btn-success btn-sm" %>
+  </div>
+</div>
+<% end %>

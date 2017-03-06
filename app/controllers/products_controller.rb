@@ -42,11 +42,7 @@ class ProductsController < ApplicationController
 
   def edit
     @product = set_product
-    if @product.user == current_user
-      render :new
-    else
-      redirect_to root_path
-    end
+    redirect_to root_path unless @product && @product.user == current_user
   end
 
   private

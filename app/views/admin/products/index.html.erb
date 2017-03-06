@@ -17,15 +17,13 @@
       <% @products.each_with_index do |product, i| %>
         <li class="list-group-item row">
           <span class="col-md-3"> 
-            <% unless product.image_url.include?('[') %>
-              <%= image_tag(product.image_url, size: "30x50") %>
-            <% end %>
+            <%= image_tag(product.get_image, size: "30x50") %>
           </span>
           <%= link_to edit_admin_product_path(product.id) ,class: "col-md-5" do %>
             <%= product.name %>
           <% end %>
           <span class="col-md-3 price" style="text-align: center; float: right;">
-            <strong> <%= "$ #{product.price.to_i/100.0}" %> </strong>
+            <strong> <%= product.price_text %> </strong>
           </span>
         </li>
       <% end %>

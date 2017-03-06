@@ -1,5 +1,4 @@
-class Admin::ProductsController < ApplicationController
-  before_action :accept_admin
+class Admin::ProductsController < Admin::ApplicationController
   def index
     @products = Product.page(params[:page])
   end
@@ -27,9 +26,9 @@ class Admin::ProductsController < ApplicationController
   def destroy
     @product = set_product
     if @product.destroy
-      flash[:success] = "Xoa san pham thành công"
+      flash[:success] = "Xóa sản phẩm thành công"
     else
-      flash[:danger] = "Vui long thu lai"
+      flash[:danger] = "Vui lòng thử lại"
     end
     redirect_to admin_products_path
   end
@@ -37,14 +36,10 @@ class Admin::ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :price, :description,:image_url, :id,:stock)
+    params.require(:product).permit(:name, :price, :description, :image_url, :id, :stock)
   end
 
   def set_product
     @product = Product.find_by(id: params[:id])
-  end
-
-  def accept_admin
-    redirect_to root_path unless current_user && current_user.admin?
   end
 end
