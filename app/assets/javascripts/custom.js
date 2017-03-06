@@ -12,6 +12,9 @@ $(document).on('turbolinks:load', function() {
 
     });
   });
+  $('.deletebtn').on('click',function() {
+    return confirm("Are you sure ?");
+  });
 
   // $("#ckbtn").click(function() {
   // });

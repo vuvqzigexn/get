@@ -1,4 +1,4 @@
-<%= form_for @product,url: {:action=>"update", :controller=>"admin/products"},class: "form-group"  do |f| %>
+<%= form_for [:admin, @product] do |f| %>
 <div class="col-md-10"  style="padding-left: 30px">
   <div class="container">
     <% flash.each do |key, value| %>
@@ -17,9 +17,9 @@
     <h3 class="price">
       Giá:
       <strong>
-        <%= f.text_field :price,type: "number", min: '0', class: "form-control" %> </strong>
+        <%= f.number_field :price,type: "number", min: '0', class: "form-control" %> </strong>
     </h3>
-    Hàng còn: <%= f.text_field :stock, type: "number", class: "form-control" %>
+    Hàng còn: <%= f.number_field :stock, type: "number", class: "form-control" %>
     <p class="rating" style="">
       <span class="rating-content">
         <i class="glyphicon glyphicon-star"></i>
@@ -35,7 +35,7 @@
       <%= f.text_area :description, class: "form-control",rows: "12" %><br />
     </div>
     <%= f.submit "Submit", class: "btn btn-success btn-sm" %>
-    <%= link_to "Xoa", admin_product_path(@product.id), method: "delete", class: "btn btn-danger btn-sm" %>
+    <%= link_to "Xoa", admin_product_path(@product.id), method: "delete", class: "btn btn-danger btn-sm deletebtn" %>
   </div>
 </div>
 <% end %>
