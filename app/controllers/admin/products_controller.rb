@@ -1,4 +1,5 @@
 class Admin::ProductsController < Admin::ApplicationController
+  before_action :set_product, only: [:update,:edit,:destroy]
   def index
     @products = Product.page(params[:page])
   end
@@ -8,7 +9,6 @@ class Admin::ProductsController < Admin::ApplicationController
   def create; end
 
   def update
-    @product = set_product
     @product.user = current_user
     if @product.update_attributes(product_params)
       flash[:success] = "Cập nhật thành công"
@@ -19,12 +19,10 @@ class Admin::ProductsController < Admin::ApplicationController
   end
 
   def edit
-    @product = set_product
     redirect_to new_product_path if @product.blank?
   end
 
   def destroy
-    @product = set_product
     if @product.destroy
       flash[:success] = "Xóa sản phẩm thành công"
     else
