@@ -1,11 +1,11 @@
 class ProductsController < ApplicationController
+  before_action :set_product, only: [:show, :update, :edit]
   def index
     @last_products = Product.last(Product::LASTEST)
     @products = Product.page(params[:page]).per(Product::PERPAGE)
   end
 
   def show
-    @product = set_product
     if @product.blank?
       flash[:danger] = "Không có sản phẩm này"
       return redirect_to root_path
@@ -30,7 +30,6 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product = set_product
     @product.user = current_user
     if @product.update_attributes(product_params)
       flash[:success] = "Cập nhật thành công"
@@ -41,7 +40,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = set_product
     redirect_to root_path unless @product && @product.user == current_user
   end
 
@@ -52,6 +50,6 @@ class ProductsController < ApplicationController
   end
 
   def set_product
-    Product.find_by(id: params[:id])
+    @product = Product.find_by(id: params[:id])
   end
 end
