@@ -1,0 +1,28 @@
+<%= form_for @order, class: "form-group"  do |f| %>
+<div class="col-md-10"  style="padding-left: 30px">
+  <div class="container">
+    <% flash.each do |key, value| %>
+      <div class ="alert alert-<%= key %>"> 
+        <%= value %>
+      </div>
+    <% end %>
+  </div>
+  <table class="table">
+    <% total = 0 %>
+    <% @cart.each do |id,item| %>
+      <tr>
+        <td><h4> <%= item['name'] %> </h4></td>
+        <td> <%= item['quantity'] %> </td>
+        <td> <%= number_to_currency(sum = item['quantity'].to_i * item['price'].to_i / 100.0,:precision => 2) %></td>
+        <% total += sum %>
+      </tr>
+    <% end %>
+  </table>
+  <h2> Tồng giá đơn hàng <%= number_to_currency(total) %></h2>
+  <br>
+  <label> Địa chỉ nhận hàng </label>
+  <%= f.text_area :shipping_address, class: 'form-control', size: '6x9' %>
+  <br>
+  <%= f.submit "Submit", class: "btn btn-success btn-sm" %>
+</div>
+<% end %>

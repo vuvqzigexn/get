@@ -1,0 +1,29 @@
+<div class="col-md-10"  style="padding-left: 26px;">
+    <div class="container">
+      <% flash.each do |key, value| %>
+        <div class ="alert alert-<%= key %>"> 
+          <%= value %>
+        </div>
+      <% end %>
+    </div>
+  <div class="clearfix"></div>
+  <span class="all container"> <h3> All order </h3> </span>
+  <div class="list-group">
+    <table class="table">
+      <% @orders.each do |order| %>
+        <tr>
+          <td>
+            <%= order[:shipping_address] %>
+          </td>
+          <td>
+            <%= number_to_currency(order[:total]/100)%>
+          </td>
+          <td>
+            <%= select("status", order.id , Status.all.collect {|p| [ p.name, p.id ] }, { :selected => order.status_id }, { :class => 'form-control changes-status' ,style: "width: 50%", data: {confirm: "Bạn có chắc không"} }) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+<span class="paginate"> <%= paginate @orders , window: 2 %> </span>

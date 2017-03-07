@@ -17,3 +17,4 @@
 .byebug_history
 _uservm.sh
 .rake_tasks~
+/config/application.yml
