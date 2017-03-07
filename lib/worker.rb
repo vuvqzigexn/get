@@ -53,7 +53,6 @@ class Worker
 
   private
 
-
   def valid_description(item)
     des = item["EditorialReviews"]
     return des["EditorialReview"]["Content"] if des.present? \

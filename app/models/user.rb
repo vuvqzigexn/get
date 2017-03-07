@@ -5,4 +5,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  def admin?
+    self.user_type == "admin"
+  end
 end

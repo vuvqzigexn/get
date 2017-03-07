@@ -1,0 +1,33 @@
+<div class="col-md-10"  style="padding-left: 26px;">
+    <div class="container">
+      <% flash.each do |key, value| %>
+        <div class ="alert alert-<%= key %>"> 
+          <%= value %>
+        </div>
+      <% end %>
+    </div>
+  <div class="container">
+    <input type="text" class="form-group" name=""></input>
+    <button class="btn btn-primary"> Search</button>
+  </div>
+  <div class="clearfix"></div>
+  <span class="all-prodcut container"> <h3> All product </h3> </span>
+  <div class="list-products list-group">
+    <ul class="list-group">
+      <% @products.each_with_index do |product, i| %>
+        <li class="list-group-item row">
+          <span class="col-md-3"> 
+            <%= image_tag(product.get_image, size: "30x50") %>
+          </span>
+          <%= link_to edit_admin_product_path(product.id) ,class: "col-md-5" do %>
+            <%= product.name %>
+          <% end %>
+          <span class="col-md-3 price" style="text-align: center; float: right;">
+            <strong> <%= product.price_text %> </strong>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+    <span class="paginate"> <%= paginate @products , window: 2 %> </span>
+  </div>
+</div>

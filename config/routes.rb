@@ -4,5 +4,8 @@ Rails.application.routes.draw do
   root to: "products#index"
   post '/add-to-cart', to: 'sessions#add_to_cart'
   get '/view-order', to: 'orders#show'
+  namespace :admin do
+    resources :products
+  end
   resources :products, :categories
 end

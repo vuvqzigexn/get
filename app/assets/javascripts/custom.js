@@ -12,7 +12,6 @@ $(document).on('turbolinks:load', function() {
 
     });
   });
-
   // $("#ckbtn").click(function() {
   // });
 });
