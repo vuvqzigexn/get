@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/view-order', to: 'orders#show'
   get '/checkout', to: 'orders#new'
   get '/orders/status', to: 'orders#status'
+  get '/search', to: 'products#search'
 
   namespace :admin do
     resources :products, :orders

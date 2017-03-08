@@ -1,9 +1,5 @@
 <div class="col-md-10"  style="padding-left: 26px;">
-  <%= render 'layouts/flash'%>
-  <div class="container">
-    <input type="text" class="form-group" name=""></input>
-    <button class="btn btn-primary"> Search</button>
-  </div>
+  <%= render 'layouts/flash' %>
   <div class="clearfix"></div>
   <span class="all-prodcut container"> <h3> All product </h3> </span>
   <div class="list-products list-group">
@@ -13,7 +9,7 @@
           <span class="col-md-3"> 
             <%= image_tag(product.image, size: "30x50") %>
           </span>
-          <%= link_to edit_admin_product_path(product.id) ,class: "col-md-5" do %>
+          <%= link_to product_path(product.id) ,class: "col-md-5" do %>
             <%= product.name %>
           <% end %>
           <span class="col-md-3 price" style="text-align: center; float: right;">
@@ -22,6 +18,6 @@
         </li>
       <% end %>
     </ul>
-    <span class="paginate"> <%= paginate @products , window: 2 %> </span>
+
   </div>
 </div>

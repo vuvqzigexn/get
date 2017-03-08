@@ -10,6 +10,7 @@
     <header class="navbar navbar-fixed-top">
       <div class="container">
         <%= link_to "online shop", root_path, id: "logo" %>
+          <%=  render 'layouts/search_form' if 'registrations' != controller.controller_name && 'sessions' != controller.controller_name  %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>

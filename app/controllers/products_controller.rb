@@ -43,6 +43,12 @@ class ProductsController < ApplicationController
     redirect_to root_path unless @product && @product.user == current_user
   end
 
+  def search
+    res = Product.new.search(params[:query])
+    ids = res['response']['docs'].map { |pd| pd['id'] }
+    @products = Product.where(id: ids)
+  end
+
   private
 
   def product_params

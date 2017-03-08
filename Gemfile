@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'kaminari'
+gem 'rsolr'
 gem 'vacuum'
 
 group :development, :test do

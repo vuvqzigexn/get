@@ -54,6 +54,15 @@ textarea {
 }
 header{
   background-color: #009a14;
+  .container{
+    display: flex;
+  }
+  .searchdiv{
+    width: 54%;
+    padding-left: 63px;
+    padding-top: 9px;
+    margin-bottom: -10px;
+  }
 }
 footer{
   height: 50px;
@@ -94,4 +103,10 @@ footer{
 }
 .buynow{
   float: right;
+}
+.search-form{
+  input{
+    width: 60%;
+    display: inline;
+  }
 }

@@ -1,21 +1,11 @@
 <div class="col-md-10"  style="padding-left: 26px;">
-    <div class="container">
-      <% flash.each do |key, value| %>
-        <div class ="alert alert-<%= key %>"> 
-          <%= value %>
-        </div>
-      <% end %>
-    </div>
-  <div class="container">
-    <input type="text" class="form-group" name=""></input>
-    <button class="btn btn-primary"> Search</button>
-  </div>
+  <%= render 'layouts/flash' %>
   <div class="grip-products col-md-12">
     <h1><%= @category.nil? ? "Hot deal" : @category.name %></h1>
     <% @last_products.each_with_index do |product,i| %>
       <div class = "col-md-3" >
         <%= link_to product_path(product.id) do %>
-          <%= image_tag(product.get_image, size: "150x220", alt:  product.name) %>
+          <%= image_tag(product.image, size: "150x220", alt:  product.name) %>
         <% end %>
         <h5>
           <%= link_to product_path(product.id), class: "title" do %>
@@ -50,7 +40,7 @@
       <% @products.each_with_index do |product, i| %>
         <li class="list-group-item row">
           <span class="col-md-3"> 
-            <%= image_tag(product.get_image, size: "30x50") %>
+            <%= image_tag(product.image, size: "30x50") %>
           </span>
           <%= link_to product_path(product.id) ,class: "col-md-5" do %>
             <%= product.name %>
