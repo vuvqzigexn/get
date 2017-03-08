@@ -15,9 +15,8 @@ class OrdersController < ApplicationController
     @order.user = current_user
     @order.status = Status.find_by(name: 'New')
     if @order.save && save_cart_item(@order.id)
+      UserMailer.checkout_email(@order).deliver_now
       session[:order] = nil
-      byebug
-      UserMailer.checkout_email(current_user || User.first)
       flash[:success] = "Thanh toán thành công hàng đang tới nhà"
       redirect_to orders_path
     else
@@ -34,10 +33,10 @@ class OrdersController < ApplicationController
       cart = CartItem.new({
         product_id: id,
         order_id: order_id,
-        price: item[:price],
+        price: item['price'],
         quantity: item['quantity']
       })
-      unsave = true unless cart.save
+      unsave = !cart.save
     end
     !unsave
   end
@@ -47,6 +46,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:shipping_address)
+    params.require(:order).permit(:shipping_address,:email)
   end
 end

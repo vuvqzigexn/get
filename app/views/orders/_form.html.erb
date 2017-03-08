@@ -18,7 +18,11 @@
       </tr>
     <% end %>
   </table>
+
+
   <h2> Tồng giá đơn hàng <%= number_to_currency(total) %></h2>
+  <label>Email</label><br>
+  <%= f.email_field :email, class: 'form-control', value: current_user.email %>
   <br>
   <label> Địa chỉ nhận hàng </label>
   <%= f.text_area :shipping_address, class: 'form-control', size: '6x9' %>
