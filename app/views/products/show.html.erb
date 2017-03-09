@@ -1,4 +1,4 @@
-<div class="col-md-10"  style="padding-left: 30px">
+<div class="col-sm-10"  style="padding-left: 30px">
   <div class="image col-md-5" >
     <%= image_tag(@product.image_url, size: "400x450") %>
   </div>
@@ -17,7 +17,7 @@
       </span>
     </p>
     <input type="number" value="1" min="0" max="<%= @product.stock %>" step="1" class="form-control quantity" id="quantity-<%= @product.id %>" />
-    <button class="btn btn-success btn-sm buynow" id='product-<%= @product.id %>'>Buy now</button>
+    <button class="btn btn-success btn-sm buynow" type="button" id='product-<%= @product.id %>'>Buy now</button>
     </br>
     <span>Hàng còn: <%= @product.stock %> </span>
   </div>

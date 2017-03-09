@@ -1,4 +1,4 @@
-<div class="col-md-10"  style="padding-left: 26px;">
+<div class="col-sm-10"  style="padding-left: 26px;">
   <%= render 'layouts/flash' %>
   <div class="grip-products col-md-12">
     <h1><%= @category.nil? ? "Hot deal" : @category.name %></h1>
@@ -16,7 +16,7 @@
             <strong> <%= product.price_text %> </strong>
             <span class="clearfix"></span>
             <input type="number" value="1" min="0" step="1" class="form-control quantity" id="quantity-<%= product.id %>" />
-            <button class="btn btn-success btn-sm buynow" id='product-<%= product.id %>'>Buy now</button>
+            <button class="btn btn-success btn-sm buynow" type="button" id='product-<%= product.id %>'>Buy now</button>
         </span>
         <br/>
         <p class="rating">

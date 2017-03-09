@@ -5,7 +5,6 @@ class Product < ApplicationRecord
 
   LASTEST = 8
   PERPAGE = 12
-  RSolr.connect url: 'http://localhost:9000/sorl/test/'
 
   def image
     return if image_url.include?('[')

@@ -8,20 +8,20 @@
   </head>
   <body class="container">
     <header class="navbar navbar-fixed-top">
-      <div class="container">
-        <%= link_to "online shop", root_path, id: "logo" %>
-        <nav>
+      <div class="container row">
+        <%= link_to "Venshop", root_path, id: "logo",class: "col-sm-3" %>
+        <%=  render 'layouts/search_form' if 'registrations' != controller.controller_name && 'sessions' != controller.controller_name  %>
+        <nav class="col-sm-5">
           <ul class="nav navbar-nav navbar-right">
-            <% if !user_signed_in? %>
-              <li>
-                <%= link_to "Đăng nhập", new_user_session_path, html_options = {style: "color: white;"} %>
-              </li>
-            <% else %>
+            <% if user_signed_in? %>
               <li><%= link_to "Tài khoản", edit_user_registration_path, html_options = {style: "color: white;"}%>
-                
               </li>
               <li> 
                 <%= link_to "Đăng Xuất", destroy_user_session_path, data: {method: "delete"},style: "color: white;" %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to "Đăng nhập", new_user_session_path, html_options = {style: "color: white;"} %>
               </li>
             <% end %>
             <li>

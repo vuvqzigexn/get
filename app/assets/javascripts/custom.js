@@ -8,7 +8,6 @@ $(document).on('turbolinks:load', function() {
         // alert(result.data);
       $('.items-count')[0].innerHTML = Object.keys(result.data).length;
       alert("Sản phẩm của bạn đã được thêm vào giỏ hàng!");
-
     });
   });
 
@@ -46,9 +45,9 @@ $(document).on('turbolinks:load', function() {
       success: function(data) {
         if (data.error) return;
         $('.items-count')[0].innerHTML = $(".item-card-quantity").length;
-        calculatePrice()
         $('#'+id).remove();
         setTimeout(function() {
+          calculatePrice();
           alert('Xóa mất rồi');
         },500);
       }

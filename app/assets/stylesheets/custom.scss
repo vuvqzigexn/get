@@ -56,12 +56,22 @@ header{
   background-color: #009a14;
   .container{
     display: flex;
+    width: 100%;
   }
   .searchdiv{
-    width: 54%;
     padding-left: 63px;
     padding-top: 9px;
     margin-bottom: -10px;
+    .search-form{
+      input{
+        width: 50%;
+        display: inline;
+      }
+    }
+  }
+  .social-area{
+    padding-left: 10px;
+    padding-top: 11px;
   }
 }
 footer{
@@ -104,9 +114,8 @@ footer{
 .buynow{
   float: right;
 }
-.search-form{
-  input{
-    width: 60%;
-    display: inline;
+@media screen and (max-width: 769px) {
+  .categories-list{
+    display: none;
   }
 }

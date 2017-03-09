@@ -8,10 +8,10 @@
   </head>
   <body class="container">
     <header class="navbar navbar-fixed-top">
-      <div class="container">
-        <%= link_to "online shop", root_path, id: "logo" %>
-          <%=  render 'layouts/search_form' if 'registrations' != controller.controller_name && 'sessions' != controller.controller_name  %>
-        <nav>
+      <div class="container row">
+        <%= link_to "Venshop", root_path, id: "logo",class: "col-sm-3" %>
+        <%=  render 'layouts/search_form' if 'registrations' != controller.controller_name && 'sessions' != controller.controller_name  %>
+        <nav class="col-sm-5">
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li><%= link_to "Tài khoản", edit_user_registration_path, html_options = {style: "color: white;"}%>
@@ -33,6 +33,28 @@
             </li>
           </ul>
         </nav>
+      <div class="social-area">
+        <div id="fb-root"></div>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '1341339592628913',
+              xfbml      : true,
+              version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+          <div class="fb-share-button" data-href="http://symmap.me" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="http://symmap.me">Chia sẻ</a></div>
+        </div>
       </div>
     </header>
     <div class="container">
