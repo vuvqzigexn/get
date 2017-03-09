@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   def show; end
 
   def new
+    redirect_to root_path if session[:order].blank?
     @cart = session[:order]
     @order = Order.new
   end
@@ -13,7 +14,6 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new((order_params).merge({total: total_price}))
     @order.user = current_user
-    @order.status = Status.find_by(name: 'New')
     if @order.save && save_cart_item(@order.id)
       UserMailer.checkout_email(@order).deliver_now
       session[:order] = nil

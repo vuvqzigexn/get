@@ -44,9 +44,9 @@ class ProductsController < ApplicationController
   end
 
   def search
-    res = Product.new.search(params[:query])
-    ids = res['response']['docs'].map { |pd| pd['id'] }
-    @products = Product.where(id: ids)
+    @solr_response = Product.new.search(params[:query])
+    ids = @solr_response['response']['docs'].map { |pd| pd['id'] }
+    @products = Product.where(id: ids).page(params[:page]).per(Product::PERPAGE)
   end
 
   private

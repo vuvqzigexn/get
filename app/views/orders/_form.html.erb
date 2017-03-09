@@ -16,10 +16,10 @@
 
   <h2> Tồng giá đơn hàng <%= number_to_currency(total) %></h2>
   <label>Email</label><br>
-  <%= f.email_field :email, class: 'form-control', value: current_user.email %>
+  <%= f.email_field :email, class: 'form-control', value: '' || current_user.email, validates: :email, required:'' %>
   <br>
   <label> Địa chỉ nhận hàng </label>
-  <%= f.text_area :shipping_address, class: 'form-control', size: '6x9' %>
+  <%= f.text_area :shipping_address, class: 'form-control', size: '6x9',  required:'' %>
   <br>
   <%= f.submit "Submit", class: "btn btn-success btn-sm" %>
 </div>

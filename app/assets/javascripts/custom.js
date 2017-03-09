@@ -1,13 +1,19 @@
 $(document).on('turbolinks:load', function() {
   var order = {}
+  function notify(title,message) {
+    $('#modal-title')[0].innerHTML = title;
+    $('#modal-body')[0].innerHTML = message;
+    $('#myModal').modal({show: 'true'});
+  }
+
   $(".buynow").click(function() {
     var product_id = this.id.split('-')[1]
     var order = {id: product_id, quantity: parseInt($('#quantity-'+product_id)[0].value)}
-    $.post('/add-to-cart',order, function(result,status) {
-      if (result.err) return
+    $.post('/add-to-cart',order, function(data) {
+      if (data.err) return notify('Thông báo',data.result);
         // alert(result.data);
-      $('.items-count')[0].innerHTML = Object.keys(result.data).length;
-      alert("Sản phẩm của bạn đã được thêm vào giỏ hàng!");
+      $('.items-count')[0].innerHTML = Object.keys(data.result).length;
+      notify('Thông báo',"Sản phẩm đã được thêm vào giỏ hàng!");
     });
   });
 
@@ -17,6 +23,10 @@ $(document).on('turbolinks:load', function() {
     for (i = 0; i < items.length; i++) {
       totalPrice += items[i].value * $('#price'+items[i].dataset.id).val();
     }
+    if (0 == totalPrice) {
+      $('#ckbtn').remove();
+      $('.cart-items').append('<h3>Giỏ trống</h3>')
+    }
     $('.totalFormat')[0].innerHTML = '$' + totalPrice / 100.0 ;
   }
   function updateQuantity(id, quantity) {
@@ -25,7 +35,7 @@ $(document).on('turbolinks:load', function() {
       type: 'PUT',
       data: {id: id, quantity: quantity },
       success: function(data) {
-        if (data.error) return;
+        if (data.error) return notify('Thông báo',data.result);
       }
     });
   }
@@ -46,10 +56,8 @@ $(document).on('turbolinks:load', function() {
         if (data.error) return;
         $('.items-count')[0].innerHTML = $(".item-card-quantity").length;
         $('#'+id).remove();
-        setTimeout(function() {
-          calculatePrice();
-          alert('Xóa mất rồi');
-        },500);
+        calculatePrice();
+        notify('Thông báo','Đã xóa sản phẩm khỏi giỏ');
       }
     });
   });
@@ -61,7 +69,7 @@ $(document).on('turbolinks:load', function() {
       type: 'PUT',
       data: {id: id, status_id: this.value},
       success: function(data) {
-        if (data.error) return;
+        if (data.error) return notify('Thông báo',data.result); ;
         // console.log('Changed status!')
       }
     });

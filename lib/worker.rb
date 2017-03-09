@@ -44,7 +44,7 @@ class Worker
             stock: Random.new.rand(5..30)
           )
           # puts "[Import success]  #{product.name}" if product.save
-        rescue StandardError?
+        rescue
           # puts e
         end
       end

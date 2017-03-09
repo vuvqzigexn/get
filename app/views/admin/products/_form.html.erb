@@ -1,6 +1,6 @@
 <%= form_for [:admin, @product] do |f| %>
 <div class="col-sm-10"  style="padding-left: 30px">
-  <%= render 'layout/flash'%>
+  <%= render 'layouts/flash'%>
   <div class="image col-sm-5" >
     <%= image_tag(@product.image_url, size: "400x450") %>
     Link hình ảnh: <%= f.text_field :image_url, class: "form-control" %><br />

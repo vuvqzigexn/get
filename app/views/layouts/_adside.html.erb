@@ -2,7 +2,7 @@
   <ul class="list-group">
     <% Category.all.each do |cate| %>
       <li class="list-group-item" >
-        <b><%= link_to(cate.name, cate) %></b>
+        <b><%= link_to(cate.name, cate, class: 'truncate') %></b>
         <strong class="products-count"> <%= cate.products.count %> </strong>
       </li>
     <% end %>

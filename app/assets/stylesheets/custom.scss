@@ -63,7 +63,7 @@ header{
     padding-top: 9px;
     margin-bottom: -10px;
     .search-form{
-      input{
+      input[type="text"]{
         width: 50%;
         display: inline;
       }
@@ -119,3 +119,7 @@ footer{
     display: none;
   }
 }
+.truncate {
+  white-space: pre-line;
+}
+
