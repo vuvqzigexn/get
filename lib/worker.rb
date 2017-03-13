@@ -17,6 +17,7 @@ class Worker
 
   def import
     (1..10).each do |page|
+      puts "page #{page}"
       get_response(page).each do |item|
         next if (attributes = item["ItemAttributes"]).nil?
         category = Category.find_or_create_by(name: attributes['ProductGroup'])
@@ -44,8 +45,8 @@ class Worker
             stock: Random.new.rand(5..30)
           )
           puts "[Import success]  #{product.name}" if product.save
-        rescue
-          # puts e
+        rescue Exception => e
+          puts e
         end
       end
     end
