@@ -18,3 +18,4 @@
 _uservm.sh
 .rake_tasks~
 /config/application.yml
+/public/assets/
