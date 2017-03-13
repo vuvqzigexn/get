@@ -1,7 +1,7 @@
 APP = YAML.load_file(Rails.root.join('config', 'application.yml'))
 class Product < ApplicationRecord
   belongs_to :category
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :cart_items
 
   LASTEST = 8

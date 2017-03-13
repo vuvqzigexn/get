@@ -8,7 +8,8 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_user.orders
+    @orders = {}
+    @orders = current_user.orders if current_user
   end
 
   def create

@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  before_create :default_status
+  before_validation :default_status
   has_many :cart_items
   belongs_to :user, optional: true
   belongs_to :status
