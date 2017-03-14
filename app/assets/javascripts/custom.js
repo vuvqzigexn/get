@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  var order = {}
+
   function notify(title,message) {
     $('#modal-title')[0].innerHTML = title;
     $('#modal-body')[0].innerHTML = message;
@@ -9,11 +9,16 @@ $(document).on('turbolinks:load', function() {
   $(".buynow").click(function() {
     var product_id = this.id.split('-')[1]
     var order = {id: product_id, quantity: parseInt($('#quantity-'+product_id)[0].value)}
-    $.post('/add-to-cart',order, function(data) {
-      if (data.err) return notify('Thông báo',data.result);
-        // alert(result.data);
-      $('.items-count')[0].innerHTML = Object.keys(data.result).length;
-      notify('Thông báo',"Sản phẩm đã được thêm vào giỏ hàng!");
+    $.ajax({
+      url: '/add-to-cart',
+      type: 'POST',
+      beforeSend: $.rails.CSRFProtection,
+      data: order,
+      success:function(data){
+        if (data.err) return notify('Thông báo',data.result);
+        $('.items-count')[0].innerHTML = Object.keys(data.result).length;
+        notify('Thông báo',"Sản phẩm đã được thêm vào giỏ hàng!");
+      }
     });
   });
 
@@ -33,7 +38,8 @@ $(document).on('turbolinks:load', function() {
     $.ajax({
       url: '/update-item-quantity',
       type: 'PUT',
-      data: {id: id, quantity: quantity },
+      beforeSend: $.rails.CSRFProtection,
+      data: {id: id, quantity: quantity},
       success: function(data) {
         if (data.error) return notify('Thông báo',data.result);
       }
@@ -51,6 +57,7 @@ $(document).on('turbolinks:load', function() {
     $.ajax({
       url: '/remove-item',
       type: 'PUT',
+      beforeSend: $.rails.CSRFProtection,
       data: {id: id },
       success: function(data) {
         if (data.error) return;
@@ -67,6 +74,7 @@ $(document).on('turbolinks:load', function() {
     $.ajax({
       url: '/admin/change-status',
       type: 'PUT',
+      beforeSend: $.rails.CSRFProtection,
       data: {id: id, status_id: this.value},
       success: function(data) {
         if (data.error) return notify('Thông báo',data.result); ;
