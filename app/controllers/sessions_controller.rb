@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:add_to_cart,:remove_item,:update_item_quantity]
   def add_to_cart
     if notify.blank?
       order = session[:order]
