@@ -4,8 +4,8 @@ class Order < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :status
 
-
   private
+
   def default_status
     self.status = Status.find_by(name: 'New')
   end

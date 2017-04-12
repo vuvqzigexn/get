@@ -58,20 +58,18 @@ Rails.application.configure do
     Bullet.alert = true
     Bullet.bullet_logger = true
     Bullet.console = true
-  #  Bullet.growl = true
+    #  Bullet.growl = true
     Bullet.rails_logger = true
     Bullet.add_footer = true
-  config.action_mailer.delivery_method = :smtp
-  # SMTP settings for gmail
-  config.action_mailer.smtp_settings = {
-   :address              => "smtp.gmail.com",
-   :port                 => 587,
-   :user_name            => ENV['GMAIL_USERNAME'],
-   :password             => ENV['GMAIL_PASSWORD'],
-   :authentication       => "plain",
-  :enable_starttls_auto => true
-  }
-  
+    config.action_mailer.delivery_method = :smtp
+    # SMTP settings for gmail
+    config.action_mailer.smtp_settings = {
+     address: "smtp.gmail.com",
+     port: 587,
+     user_name: ENV['GMAIL_USERNAME'],
+     password: ENV['GMAIL_PASSWORD'],
+     authentication: "plain",
+     enable_starttls_auto: true
+    }
   end
-
 end

@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308033355) do
-
+ActiveRecord::Schema.define(version: 20_170_308_033_355) do
   create_table "cart_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "product_id"
     t.integer  "order_id"
-    t.float    "price",      limit: 24
+    t.float    "price", limit: 24
     t.integer  "quantity"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
@@ -23,14 +22,14 @@ ActiveRecord::Schema.define(version: 20170308033355) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.text     "description", limit: 65535
+    t.text     "description", limit: 65_535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.float    "total",            limit: 24
-    t.text     "shipping_address", limit: 65535
+    t.text     "shipping_address", limit: 65_535
     t.integer  "status_id"
     t.integer  "user_id"
     t.datetime "created_at",                     null: false
@@ -40,12 +39,12 @@ ActiveRecord::Schema.define(version: 20170308033355) do
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.float    "price",       limit: 24
+    t.float    "price", limit: 24
     t.string   "origin"
     t.string   "image_url"
     t.integer  "user_id"
     t.integer  "category_id"
-    t.text     "description", limit: 65535
+    t.text     "description", limit: 65_535
     t.integer  "stock"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
@@ -63,7 +62,7 @@ ActiveRecord::Schema.define(version: 20170308033355) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -75,5 +74,4 @@ ActiveRecord::Schema.define(version: 20170308033355) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
 end

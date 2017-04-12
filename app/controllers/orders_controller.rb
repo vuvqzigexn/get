@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new((order_params).merge({total: total_price}))
+    @order = Order.new(order_params.merge({total: total_price}))
     @order.user = current_user
     if @order.save && save_cart_item(@order.id)
       UserMailer.checkout_email(@order).deliver_now
